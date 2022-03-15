@@ -37,7 +37,7 @@ runs:
           VERSION: ${{ env.VERSION }}
           METADATA_FILE: ${{ inputs.metadata-file }}
         run: |
-          hc-releases metadata create -product "${{ inputs.product-name }}"" \
+          hc-releases metadata create -product "${{ inputs.product-name }}" \
           -add /version='"$VERSION"' \
           -add /url_changelog='"https://github.com/${{ github.repository }}/blob/$VERSION/CHANGELOG.md"' \
           -input "$METADATA_FILE"
