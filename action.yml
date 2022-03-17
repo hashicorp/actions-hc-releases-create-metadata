@@ -17,6 +17,9 @@ inputs:
     description: 'Release metadatafile. This file should contain any static metadata.'
     required: false
     default: '.release/release-metadata.hcl'
+  changelog-url:
+    description: 'changelog URL to add to the release metadata'
+    required: false
 
 runs:
   using: "composite"
@@ -39,5 +42,5 @@ runs:
         run: |
           hc-releases metadata create -product "${{ inputs.product-name }}" \
           -add /version='"${{ env.VERSION }}"' \
-          -add /url_changelog='"https://github.com/${{ github.repository }}/blob/${{ inputs.version }}/CHANGELOG.md"' \
+          -add /url_changelog='"${{ inputs.changelog-url }}"' \
           -input "${{ inputs.metadata-file }}"
