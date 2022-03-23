@@ -8,6 +8,6 @@ else
 fi
 
 hc-releases metadata create -product "$PRODUCT_NAME" \
--add /version='"$VERSION"' \
--add /url_changelog='"$changelogurl"' \
+-add /version='"'"$VERSION"'"' \
+-add /url_changelog='"'"$changelogurl"'"' \
 -input "$METADATA_FILE"
