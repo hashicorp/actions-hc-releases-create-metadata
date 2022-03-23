@@ -20,6 +20,7 @@ inputs:
   changelog-url:
     description: 'changelog URL to add to the release metadata'
     required: false
+    default: ""
 
 runs:
   using: "composite"
@@ -38,7 +39,6 @@ runs:
           HC_RELEASES_HOST: ${{ inputs.hc-releases-host }}
           HC_RELEASES_KEY: ${{ inputs.hc-releases-key }}
           VERSION: ${{ env.VERSION }}
-          METADATA_FILE: ${{ inputs.metadata-file }}
         run: |
           hc-releases metadata create -product "${{ inputs.product-name }}" \
           -add /version='"${{ env.VERSION }}"' \
