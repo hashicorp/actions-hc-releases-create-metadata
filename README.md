@@ -25,7 +25,7 @@ GitHub action for generating and publishing release metadata using hc-releases.
 	with:
 		product-name: "terraform-ls"
 		version: "${{ github.ref_name }}"
-		hc-releases-host: "${{ secrets.HC_RELEASES_HOST }}"
-		hc-releases-key: "${{ secrets.HC_RELEASES_KEY }}"
+		hc-releases-host: "${{ secrets.HC_RELEASES_HOST_STAGING }}"
+		hc-releases-key: "${{ secrets.HC_RELEASES_KEY_STAGING }}"
 		changelog: "false"
 ```
