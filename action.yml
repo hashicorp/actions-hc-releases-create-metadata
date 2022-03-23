@@ -1,4 +1,4 @@
-name: 'publish metadata and artifacts with hc-releases'
+name: 'Publish metadata and artifacts with hc-releases'
 description: 'Use hc-releases to create metadata and upload files.'
 inputs:
   product-name:
@@ -17,30 +17,22 @@ inputs:
     description: 'Release metadatafile. This file should contain any static metadata.'
     required: false
     default: '.release/release-metadata.hcl'
-  changelog-url:
-    description: 'changelog URL to add to the release metadata'
+  changelog:
+    description: 'Add changelog URL to the release metadata'
     required: false
-    default: ""
-
+    default: 'true'
 runs:
   using: "composite"
   steps:
-      - name: Set required repo name env var
-        shell: bash
-        run: echo "REPO_NAME=$(echo ${{ github.repository }} | cut -f2 -d "/")" >> $GITHUB_ENV
-      - name: Set version
-        shell: bash
-        run: |
-          VERSION="${{ inputs.version }}"
-          echo "VERSION=$(echo "${VERSION//v}")" >> $GITHUB_ENV
-      - name: Create Release metadata
+      - name: Create Release Metadata
         shell: bash
         env:
           HC_RELEASES_HOST: ${{ inputs.hc-releases-host }}
           HC_RELEASES_KEY: ${{ inputs.hc-releases-key }}
           VERSION: ${{ env.VERSION }}
+          CHANGELOG: ${{ inputs.changelog }}
+          METADATA_FILE: ${{ inputs.metadata-file }}
+          PRODUCT_NAME: ${{ inputs.product-name }}
+          REPO: ${{ github.repository }} 
         run: |
-          hc-releases metadata create -product "${{ inputs.product-name }}" \
-          -add /version='"${{ env.VERSION }}"' \
-          -add /url_changelog='"${{ inputs.changelog-url }}"' \
-          -input "${{ inputs.metadata-file }}"
+          ${{ github.action_path }}/scripts/create-metadata.sh
