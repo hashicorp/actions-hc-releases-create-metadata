@@ -10,8 +10,11 @@ mkdir build-artifacts
 
 for EXTENSION in $BUILD_ARTIFACTS
 do
-	cp *."$EXTENSION" build-artifacts/
+	cp "$ARTIFACT_DIR"/*."$EXTENSION" build-artifacts/
+	echo "$ARTIFACT_DIR"/*."$EXTENSION"
 done
+
+ls build-artifacts
 
 if [ "$CHANGELOG" == 'true' ]; then
 	changelogurl="https://github.com/$REPO/blob/v$VERSION/CHANGELOG.md"
