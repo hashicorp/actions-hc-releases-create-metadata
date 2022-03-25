@@ -56,7 +56,7 @@ runs:
           ARTIFACT_DIR: ${{ inputs.artifact_dir }}
           BUILD_ARTIFACTS: ${{ inputs.build_artifacts }}
         run: |
-          ${{ github.action_path }}/scripts/create-metadata.sh
+          ${{ github.action_path }}/scripts/generate-metadata.sh
       - name: Publish Release Metadata
         shell: bash
         env:
