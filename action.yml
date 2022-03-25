@@ -1,6 +1,9 @@
-name: 'Publish metadata and artifacts with hc-releases'
-description: 'Use hc-releases to create metadata and upload files.'
+name: 'Publish metadata with hc-releases'
+description: 'Use hc-releases to create release metadata.'
 inputs:
+  private-tools-token:
+    description: 'Token with permission to download bob and hc-releases'
+    required: true
   product-name:
     description: 'Product name'
     required: true
@@ -21,10 +24,26 @@ inputs:
     description: 'Add changelog URL to the release metadata'
     required: false
     default: 'true'
+  artifact-dir:
+    description: 'Directory containing release artifacts'
+    required: false
+    default: 'dist'
+  build-artifacts:
+    description: 'Build artifact file extensions - space separated list. These files will get added to the build metadata.'
+    required: false
+    default: 'zip'
 runs:
   using: "composite"
   steps:
-      - name: Create Release Metadata
+      - uses: hashicorp/action-setup-bob@v1
+        with:
+          github-token: "${{ inputs.private-tools-token }}"
+          version: "0.0.22-beta4"
+      - name: Setup hc-releases
+        uses: hashicorp/actions-setup-hc-releases@v1
+        with:
+          github-token: "${{ inputs.private-tools-token }}"
+      - name: Generate Release Metadata
         shell: bash
         env:
           HC_RELEASES_HOST: ${{ inputs.hc-releases-host }}
@@ -33,6 +52,17 @@ runs:
           CHANGELOG: ${{ inputs.changelog }}
           METADATA_FILE: ${{ inputs.metadata-file }}
           PRODUCT_NAME: ${{ inputs.product-name }}
-          REPO: ${{ github.repository }} 
+          REPO: ${{ github.repository }}
+          ARTIFACT_DIR: ${{ inputs.artifact_dir }}
+          BUILD_ARTIFACTS: ${{ inputs.build_artifacts }}
         run: |
           ${{ github.action_path }}/scripts/create-metadata.sh
+      - name: Publish Release Metadata
+        shell: bash
+        env:
+          HC_RELEASES_HOST: ${{ inputs.hc-releases-host }}
+          HC_RELEASES_KEY: ${{ inputs.hc-releases-key }}
+          METADATA_FILE: "release-metadata-final.json"
+          PRODUCT_NAME: ${{ inputs.product-name }}
+        run: |
+          ${{ github.action_path }}/scripts/publish-metadata.sh
