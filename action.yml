@@ -48,7 +48,7 @@ runs:
         env:
           HC_RELEASES_HOST: ${{ inputs.hc-releases-host }}
           HC_RELEASES_KEY: ${{ inputs.hc-releases-key }}
-          VERSION: ${{ env.VERSION }}
+          VERSION: ${{ inputs.version }}
           CHANGELOG: ${{ inputs.changelog }}
           METADATA_FILE: ${{ inputs.metadata-file }}
           PRODUCT_NAME: ${{ inputs.product-name }}
