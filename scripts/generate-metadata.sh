@@ -6,16 +6,6 @@ curl -SsL https://github.com/kvz/json2hcl/releases/download/v0.0.6/json2hcl_v0.0
 
 json2hcl -reverse < "$METADATA_FILE" > meta.json
 
-mkdir build-artifacts
-
-for EXTENSION in $BUILD_ARTIFACTS
-do
-	cp "$ARTIFACT_DIR"/*."$EXTENSION" build-artifacts/
-	echo "$ARTIFACT_DIR"/*."$EXTENSION"
-done
-
-ls build-artifacts
-
 if [ "$CHANGELOG" == 'true' ]; then
 	changelogurl="https://github.com/$REPO/blob/v$VERSION/CHANGELOG.md"
 else
@@ -23,5 +13,5 @@ else
 fi
 
 bob generate-release-metadata -metadata-file "meta.json" \
--in-dir "build-artifacts" -out-file "release-metadata-final.json" \
+-in-dir "$ARTIFACT_DIR" -out-file "release-metadata-final.json" \
 -changelog-url "$changelogurl" -version "$VERSION"

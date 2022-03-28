@@ -29,7 +29,7 @@ inputs:
     required: false
     default: 'dist'
   build-artifacts:
-    description: 'Build artifact file extensions - space separated list. These files will get added to the build metadata.'
+    description: '(Deprecated) Build artifact file extensions - space separated list. These files will get added to the build metadata.'
     required: false
     default: 'zip'
 runs:
