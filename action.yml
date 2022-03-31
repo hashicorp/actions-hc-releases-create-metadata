@@ -40,7 +40,7 @@ runs:
           github-token: "${{ inputs.private-tools-token }}"
           version: "0.0.22"
       - name: Setup hc-releases
-        uses: hashicorp/actions-setup-hc-releases@v1
+        uses: hashicorp/setup-hc-releases@v2
         with:
           github-token: "${{ inputs.private-tools-token }}"
       - name: Generate Release Metadata
