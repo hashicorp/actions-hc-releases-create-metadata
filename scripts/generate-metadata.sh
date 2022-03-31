@@ -12,6 +12,9 @@ else
 	changelogurl=""
 fi
 
+# XXX we don't support JSON artifacts yet; RDX-400
+/bin/rm -f "$ARTIFACT_DIR"/*.json
+
 bob generate-release-metadata -metadata-file "meta.json" \
 -in-dir "$ARTIFACT_DIR" -out-file "release-metadata-final.json" \
 -changelog-url "$changelogurl" -version "$VERSION"
