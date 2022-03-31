@@ -16,7 +16,7 @@ GitHub action for generating and publishing release metadata using hc-releases.
 | metadata-file      | Release hcl metadata-file (will use project-dir as the base dir)                                        | No       | .release/release-metadata.hcl                            | string      |
 | changelog          | Add changelog URL to the release metadata                                                               | No       | 'true'		    										 | string      |
 | artifact-dir       | Directory containing release artifacts                                                                  | No       | 'dist'                                                   | string      |
-| build-artifacts    | Build artifact file extensions - space separated list. These files will get added to the build metadata | No       | 'zip'                                                    | string      |
+| build-artifacts    | (Deprecated) Build artifact file extensions - space separated list. These files will get added to the build metadata | No       | 'zip'                                                    | string      |
 
 ### Example Usage
 
