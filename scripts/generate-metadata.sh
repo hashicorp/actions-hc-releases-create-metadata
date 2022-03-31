@@ -12,8 +12,14 @@ else
 	changelogurl=""
 fi
 
-# XXX we don't support JSON artifacts yet; RDX-400
-/bin/rm -f "$ARTIFACT_DIR"/*.json
+# Remove the .json and .yaml files created by goreleaser in the artifact
+# directory; we don't publish those
+/bin/rm -f \
+    "$ARTIFACT_DIR"/artifacts.json \
+    "$ARTIFACT_DIR"/metadata.json \
+    "$ARTIFACT_DIR"/config.yaml
+find "$ARTIFACT_DIR" -type d -mindepth 1 -maxdepth 1 -print0 \
+    | xargs -0 /bin/rm -rf
 
 bob generate-release-metadata -metadata-file "meta.json" \
 -in-dir "$ARTIFACT_DIR" -out-file "release-metadata-final.json" \
