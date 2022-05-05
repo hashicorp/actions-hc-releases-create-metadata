@@ -38,7 +38,6 @@ runs:
       - uses: hashicorp/action-setup-bob@v1
         with:
           github-token: "${{ inputs.private-tools-token }}"
-          version: "0.0.22"
       - name: Setup hc-releases
         uses: hashicorp/setup-hc-releases@v2
         with:
