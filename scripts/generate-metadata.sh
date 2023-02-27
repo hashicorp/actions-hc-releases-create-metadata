@@ -1,8 +1,16 @@
 #!/usr/bin/env bash
-VERSION="${VERSION//v}"
 
-curl -SsL https://github.com/kvz/json2hcl/releases/download/v0.0.6/json2hcl_v0.0.6_linux_amd64 \
-| sudo tee /usr/local/bin/json2hcl > /dev/null && sudo chmod 755 /usr/local/bin/json2hcl && json2hcl -version
+set -euo pipefail
+
+VERSION="${VERSION//v}"
+DESTDIR="${HOME}/bin"
+
+mkdir -p "$DESTDIR"
+curl --silent --show-error --fail --location -o "${DESTDIR}/json2hcl" \
+    https://github.com/kvz/json2hcl/releases/download/v0.0.6/json2hcl_v0.0.6_linux_amd64
+chmod 755 "${DESTDIR}/json2hcl"
+export PATH="${PATH}:$DESTDIR"
+json2hcl -version
 
 json2hcl -reverse < "$METADATA_FILE" > meta.json
 
