@@ -17,6 +17,7 @@ GitHub action for generating and publishing release metadata using hc-releases.
 | changelog          | Add changelog URL to the release metadata                                                               | No       | 'true'		    										 | string      |
 | artifact-dir       | Directory containing release artifacts                                                                  | No       | 'dist'                                                   | string      |
 | build-artifacts    | (Deprecated) Build artifact file extensions - space separated list. These files will get added to the build metadata | No       | 'zip'                                                    | string      |
+| product-repo       | Org-qualified product repo if not the same as the repo running the action, e.g. "hashicorp/vault".      | No       | ''                                                       | string      |
 
 ### Example Usage
 

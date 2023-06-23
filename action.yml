@@ -32,6 +32,9 @@ inputs:
     description: '(Deprecated) Build artifact file extensions - space separated list. These files will get added to the build metadata.'
     required: false
     default: 'zip'
+  product-repo:
+    description: 'Org-qualified product repo if not the same as the repo running the action, e.g. "hashicorp/vault"'
+    required: false
 runs:
   using: "composite"
   steps:
@@ -52,6 +55,7 @@ runs:
           METADATA_FILE: ${{ inputs.metadata-file }}
           PRODUCT_NAME: ${{ inputs.product-name }}
           REPO: ${{ github.repository }}
+          PRODUCT_REPO: ${{ inputs.product-repo }}
           ARTIFACT_DIR: ${{ inputs.artifact-dir }}
           BUILD_ARTIFACTS: ${{ inputs.build-artifacts }}
         run: |
