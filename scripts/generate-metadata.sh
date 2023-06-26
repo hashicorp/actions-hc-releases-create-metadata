@@ -15,7 +15,7 @@ json2hcl -version
 json2hcl -reverse < "$METADATA_FILE" > meta.json
 
 if [ "$CHANGELOG" == 'true' ]; then
-	changelogurl="https://github.com/$REPO/blob/v$VERSION/CHANGELOG.md"
+	changelogurl="https://github.com/${PRODUCT_REPO:-REPO}/blob/v$VERSION/CHANGELOG.md"
 else
 	changelogurl=""
 fi
