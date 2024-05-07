@@ -38,7 +38,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-      - uses: hashicorp/action-setup-bob@v1
+      - uses: hashicorp/action-setup-bob@v2
         with:
           github-token: "${{ inputs.private-tools-token }}"
       - name: Setup hc-releases
