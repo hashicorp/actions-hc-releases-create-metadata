@@ -1,0 +1,12 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
+---
+schema: 1.1
+partition: release-engineering
+category: github-action
+summary:
+  owner: team-selfmanaged-releng
+  description: |
+    Use hc-releases to create release metadata.
+  visibility: public

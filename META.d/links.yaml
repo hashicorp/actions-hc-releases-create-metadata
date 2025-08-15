@@ -1,0 +1,6 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
+other_links:
+  - name: actions-hc-releases-create-metadata
+    link: https://github.com/hashicorp/actions-hc-releases-create-metadata
