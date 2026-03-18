@@ -17,6 +17,9 @@ json2hcl -version
 
 json2hcl -reverse < "$METADATA_FILE" > meta.json
 
+echo "meta.json" >&2
+cat meta.json >&2
+
 if [ "$CHANGELOG" == 'true' ]; then
 	changelogurl="https://github.com/${PRODUCT_REPO:-REPO}/blob/v$VERSION/CHANGELOG.md"
 else
@@ -35,3 +38,6 @@ find "$ARTIFACT_DIR" -type d -mindepth 1 -maxdepth 1 -print0 \
 bob generate-release-metadata -metadata-file "meta.json" \
 -in-dir "$ARTIFACT_DIR" -out-file "release-metadata-final.json" \
 -changelog-url "$changelogurl" -version "$VERSION"
+
+echo "release-metadata-final.json" >&2
+cat release-metadata-final.json >&2
